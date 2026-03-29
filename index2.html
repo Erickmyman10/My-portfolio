@@ -1,13 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="stylesheet" href="style.css">
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- NAVBAR -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Adebayo Gabriel — Fullstack Developer</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Manrope:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    * { scroll-behavior: smooth; }
+    body { font-family: 'Manrope', sans-serif; background: #faf7f2; color: #1c1917; }
+    h1, h2, h3, h4, .font-display { font-family: 'Syne', sans-serif; }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: -3px; left: 0;
+      width: 0; height: 2px; background: #166534;
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .accent-line { display: block; width: 52px; height: 3px; background: #47e782; margin-bottom: 16px; border-radius: 4px; }
+    .tag-pill { display: inline-block; background: #dcfce7; color: #166534; padding: 4px 14px; border-radius: 999px; font-size: 13px; font-weight: 600; }
+    .bar-fill { border-radius: 999px; height: 8px; }
+
+    /* Mobile menu hidden by default */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: flex; }
+  </style>
+</head>
+<body>
+
+  <!-- ═══ NAVBAR ═══ -->
   <nav class="fixed top-0 left-0 right-0 z-50 bg-[#faf7f2]/90 backdrop-blur-sm border-b border-stone-200">
-    <div class="max-w-6xl mx-auto px-6 py-4 flex justify-between items-center">
-      <a href="#" class="font-display font-extrabold text-xl tracking-tight text-stone-900">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 py-4 flex justify-between items-center">
+      <a href="#" class="font-display font-extrabold text-lg sm:text-xl tracking-tight text-stone-900">
         Adebayo Gabriel<span class="text-green-700">.</span>
       </a>
       <ul class="hidden md:flex gap-8 text-sm font-medium text-stone-500">
@@ -15,101 +43,117 @@
         <li><a href="#skills"  class="nav-link hover:text-stone-900 transition-colors">Skills</a></li>
         <li><a href="#contact" class="nav-link hover:text-stone-900 transition-colors">Contact</a></li>
       </ul>
-      <div class="flex items-center gap-3">
-        <a href="mailto:gabrieladebayo10@gmail.com" class="hidden md:inline-block bg-stone-900 text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-green-800 transition-colors">Hire Me</a>
-        <!-- Hamburger -->
-        <button class="md:hidden flex flex-col gap-1.5 p-2" onclick="toggleMenu()">
-          <span class="w-6 h-0.5 bg-stone-900 block"></span>
-          <span class="w-6 h-0.5 bg-stone-900 block"></span>
-          <span class="w-6 h-0.5 bg-stone-900 block"></span>
-        </button>
-      </div>
+      <a href="mailto:gabrieladebayo10@gmail.com"
+         class="hidden md:inline-block bg-stone-900 text-white text-sm font-semibold px-5 py-2.5 rounded-full hover:bg-green-800 transition-colors">
+        Hire Me
+      </a>
+      <!-- Hamburger — mobile only, pure CSS checkbox trick, no JS -->
+      <label for="menu-toggle" class="md:hidden flex flex-col gap-1.5 p-2 cursor-pointer">
+        <span class="w-6 h-0.5 bg-stone-900 block"></span>
+        <span class="w-6 h-0.5 bg-stone-900 block"></span>
+        <span class="w-6 h-0.5 bg-stone-900 block"></span>
+      </label>
+      <input type="checkbox" id="menu-toggle" class="hidden peer" />
     </div>
-    <!-- Mobile Menu -->
-    <div id="mobile-menu" class="flex-col gap-2 px-6 pb-5 bg-[#faf7f2] border-t border-stone-100 text-sm font-medium text-stone-600">
-      <a href="#about"   onclick="toggleMenu()" class="block py-2 hover:text-green-700">About</a>
-      <a href="#skills"  onclick="toggleMenu()" class="block py-2 hover:text-green-700">Skills</a>
-      <a href="#contact" onclick="toggleMenu()" class="block py-2 hover:text-green-700">Contact</a>
-      <a href="mailto:gabrieladebayo10@gmail.com" class="inline-block mt-2 bg-stone-900 text-white px-5 py-2.5 rounded-full hover:bg-green-800 transition-colors">Hire Me</a>
+    <!-- Mobile dropdown — toggled by checkbox, no JS -->
+    <div class="peer-checked:flex hidden flex-col gap-1 px-4 pb-5 bg-[#faf7f2] border-t border-stone-100 text-sm font-medium text-stone-600 md:hidden">
+      <a href="#about"   class="block py-2 hover:text-green-700">About</a>
+      <a href="#skills"  class="block py-2 hover:text-green-700">Skills</a>
+      <a href="#contact" class="block py-2 hover:text-green-700">Contact</a>
+      <a href="mailto:gabrieladebayo10@gmail.com"
+         class="inline-block mt-2 bg-stone-900 text-white px-5 py-2.5 rounded-full hover:bg-green-800 transition-colors self-start">
+        Hire Me
+      </a>
     </div>
   </nav>
- 
-  <!-- HERO -->
-  <section class="min-h-screen pt-28 pb-20 flex items-center bg-[#faf7f2]">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
-      <div>
-        <span class="tag-pill anim-1">Available for Work 🟢</span>
-        <h1 class="font-display text-4xl sm:text-5xl md:text-[68px] font-extrabold text-stone-900 leading-[1.05] mt-5 anim-2">
-          Adebayo<br><span class="text-green-700">Gabriel.</span>
+
+  <!-- ═══ HERO ═══ -->
+  <section class="min-h-screen pt-24 sm:pt-28 pb-16 sm:pb-20 flex items-center bg-[#faf7f2]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+
+      <!-- Text -->
+      <div class="text-center md:text-left order-2 md:order-1">
+        <span class="tag-pill">Available for Work 🟢</span>
+        <h1 class="font-display text-4xl sm:text-5xl md:text-[64px] lg:text-[68px] font-extrabold text-stone-900 leading-[1.05] mt-5">
+          Adebayo<br/><span class="text-green-700">Gabriel.</span>
         </h1>
-        <p class="text-lg sm:text-xl text-stone-500 mt-5 font-light anim-3">
-          Junior Frontend Developer<br>
+        <p class="text-lg sm:text-xl text-stone-500 mt-5 font-light">
+          Junior Fullstack Developer<br/>
           <span class="text-stone-400 text-base">Lagos, Nigeria 🇳🇬</span>
         </p>
-        <p class="text-stone-600 mt-5 leading-relaxed max-w-md anim-3">
-          I build clean, functional web experiences — from responsive frontends to polished UIs. Passionate about turning ideas into real products that work.
+        <p class="text-stone-600 mt-5 leading-relaxed max-w-md mx-auto md:mx-0">
+          I build clean, functional web experiences — from responsive frontends to backend APIs.
+          Passionate about turning ideas into real products that work.
         </p>
-        <div class="flex flex-wrap gap-4 mt-8 anim-4">
-          <a href="#skills" class="bg-stone-900 text-white px-7 py-3 rounded-full font-semibold hover:bg-green-800 transition-colors">View My Skills</a>
-          <a href="#contact" class="border-2 border-stone-300 text-stone-700 px-7 py-3 rounded-full font-semibold hover:border-green-700 hover:text-green-700 transition-colors">Contact Me</a>
+        <div class="flex flex-wrap gap-4 mt-8 justify-center md:justify-start">
+          <a href="#skills"
+             class="bg-stone-900 text-white px-6 sm:px-7 py-3 rounded-full font-semibold hover:bg-green-800 transition-colors text-sm sm:text-base">
+            View My Skills
+          </a>
+          <a href="#contact"
+             class="border-2 border-stone-300 text-stone-700 px-6 sm:px-7 py-3 rounded-full font-semibold hover:border-green-700 hover:text-green-700 transition-colors text-sm sm:text-base">
+            Contact Me
+          </a>
         </div>
-        <div class="flex gap-6 mt-10 anim-4 text-sm font-medium">
-          <a href="https://github.com/Top-G-script" target="_blank" class="text-stone-400 hover:text-stone-900 transition-colors">GitHub</a>
+        <div class="flex gap-6 mt-8 sm:mt-10 text-sm font-medium justify-center md:justify-start">
+          <a href="https://github.com/Top-G-script" target="_blank"
+             class="text-stone-400 hover:text-stone-900 transition-colors">GitHub</a>
           <span class="text-stone-300">·</span>
           <a href="#" class="text-stone-400 hover:text-stone-900 transition-colors">LinkedIn</a>
           <span class="text-stone-300">·</span>
           <a href="#" class="text-stone-400 hover:text-stone-900 transition-colors">Twitter</a>
         </div>
       </div>
- 
-      <!-- Photo -->
-      <div class="flex items-center justify-center anim-img mt-10 md:mt-0">
-        <img src="Images/Adebayo.jpg" alt="Adebayo Gabriel Portrait"
-          class="w-full max-w-xs sm:max-w-sm md:max-w-full h-[360px] sm:h-[440px] md:h-[520px] object-cover object-top rounded-2xl"
-          style="mask-image: radial-gradient(ellipse 85% 90% at 50% 40%, black 60%, transparent 100%);" />
+
+    <!-- Photo -->
+<div class="flex items-center justify-center order-1 md:order-2">
+  <img src="Images/Adebayo.jpg" alt="Adebayo Gabriel Portrait" class="w-64 h-80 sm:w-80 sm:h-[420px] md:w-full md:h-[480px] lg:h-[520px] object-cover object-top rounded-2xl shadow-xl" />
+</div>
+
+    </div>
+  </section>
+
+  <!-- ═══ STATS BAR ═══ -->
+  <section class="bg-stone-900 py-10 sm:py-12">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-2 md:grid-cols-4 gap-6 sm:gap-8 text-center">
+      <div>
+        <p class="font-display text-3xl sm:text-4xl font-bold text-green-400">1+</p>
+        <p class="text-stone-400 text-xs sm:text-sm mt-1 font-light">Year Learning</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl sm:text-4xl font-bold text-green-400">5+</p>
+        <p class="text-stone-400 text-xs sm:text-sm mt-1 font-light">Tools</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl sm:text-4xl font-bold text-green-400">100%</p>
+        <p class="text-stone-400 text-xs sm:text-sm mt-1 font-light">Commitment</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl sm:text-4xl font-bold text-green-400">100%</p>
+        <p class="text-stone-400 text-xs sm:text-sm mt-1 font-light">Dedication</p>
       </div>
     </div>
   </section>
- 
-  <!-- STATS BAR -->
-  <section class="bg-stone-900 py-12">
-    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-8 text-center">
-      <div>
-        <p class="font-display text-3xl md:text-4xl font-bold text-green-400">1+</p>
-        <p class="text-stone-400 text-sm mt-1 font-light">Year Learning</p>
-      </div>
-      <div>
-        <p class="font-display text-3xl md:text-4xl font-bold text-green-400">3+</p>
-        <p class="text-stone-400 text-sm mt-1 font-light">Projects Built</p>
-      </div>
-      <div>
-        <p class="font-display text-3xl md:text-4xl font-bold text-green-400">5+</p>
-        <p class="text-stone-400 text-sm mt-1 font-light">Tools & Technologies</p>
-      </div>
-      <div>
-        <p class="font-display text-3xl md:text-4xl font-bold text-green-400">100%</p>
-        <p class="text-stone-400 text-sm mt-1 font-light">Dedication</p>
-      </div>
-    </div>
-  </section>
- 
-  <!-- ABOUT -->
-  <section id="about" class="py-20 md:py-28 bg-white">
-    <div class="max-w-6xl mx-auto px-6 grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+
+  <!-- ═══ ABOUT ═══ -->
+  <section id="about" class="py-20 sm:py-28 bg-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6 grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-center">
+
+      <!-- Text LEFT -->
       <div>
         <span class="accent-line"></span>
         <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 mb-6">About Me</h2>
         <p class="text-stone-600 leading-relaxed mb-4">
-          I'm <strong>Adebayo Gabriel</strong>, a junior frontend developer based in Lagos, Nigeria.
+          I'm <strong>Adebayo Gabriel</strong>, a junior fullstack developer based in Lagos, Nigeria.
           I'm currently studying at <strong>Anchorsoft Academy</strong>, building a strong
           foundation in modern web development.
         </p>
         <p class="text-stone-600 leading-relaxed mb-4">
           I specialize in clean, responsive frontends using HTML, CSS, Tailwind CSS,
-          and JavaScript. I enjoy turning designs into real, working interfaces.
+          and JavaScript, while exploring backend development with Node.js and MongoDB.
         </p>
         <p class="text-stone-600 leading-relaxed mb-8">
-          My goal is to become a confident developer who delivers real value.
+          My goal is to become a confident fullstack engineer who delivers real value.
           Every project teaches me something new, and I'm committed to growing every day.
         </p>
         <div class="grid grid-cols-2 gap-y-4 gap-x-8 text-sm border-t border-stone-100 pt-6">
@@ -123,7 +167,7 @@
           </div>
           <div>
             <p class="text-stone-400 text-xs uppercase tracking-widest mb-1">Focus</p>
-            <p class="font-semibold text-stone-800">Frontend Development</p>
+            <p class="font-semibold text-stone-800">Fullstack Development</p>
           </div>
           <div>
             <p class="text-stone-400 text-xs uppercase tracking-widest mb-1">Status</p>
@@ -131,160 +175,232 @@
           </div>
         </div>
       </div>
- 
-      <!-- What I Do -->
-      <div class="bg-[#faf7f2] rounded-2xl p-6 md:p-8 space-y-4 mt-4 md:mt-0">
-        <h3 class="font-display font-bold text-xl text-stone-900 mb-2">What I Do</h3>
-        <div class="flex gap-4 p-4 bg-white rounded-xl shadow-sm">
-          <div class="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center text-green-800 font-bold font-display flex-shrink-0">01</div>
+
+      <!-- What I Do RIGHT -->
+      <div class="bg-[#faf7f2] rounded-2xl p-6 sm:p-8 space-y-6">
+        <h3 class="font-display font-bold text-xl text-stone-900">What I Do</h3>
+        <div class="flex gap-4">
+          <div class="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center text-green-800 font-bold font-display flex-shrink-0 text-sm">01</div>
           <div>
             <h4 class="font-semibold text-stone-900">Frontend Development</h4>
             <p class="text-stone-500 text-sm mt-1 leading-relaxed">Building responsive, pixel-perfect UIs with HTML, CSS, Tailwind and JavaScript.</p>
           </div>
         </div>
-        <div class="flex gap-4 p-4 bg-white rounded-xl shadow-sm">
-          <div class="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center text-green-800 font-bold font-display flex-shrink-0">02</div>
+        <div class="flex gap-4">
+          <div class="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center text-green-800 font-bold font-display flex-shrink-0 text-sm">02</div>
+          <div>
+            <h4 class="font-semibold text-stone-900">Backend Development</h4>
+            <p class="text-stone-500 text-sm mt-1 leading-relaxed">Building solid and real life projects to meet user needs.</p>
+          </div>
+        </div>
+        <div class="flex gap-4">
+          <div class="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center text-green-800 font-bold font-display flex-shrink-0 text-sm">03</div>
           <div>
             <h4 class="font-semibold text-stone-900">UI Design</h4>
             <p class="text-stone-500 text-sm mt-1 leading-relaxed">Designing clean, user-friendly interfaces that look great on all screen sizes.</p>
           </div>
         </div>
-        <div class="flex gap-4 p-4 bg-white rounded-xl shadow-sm">
-          <div class="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center text-green-800 font-bold font-display flex-shrink-0">03</div>
+        <div class="flex gap-4">
+          <div class="w-11 h-11 bg-green-100 rounded-xl flex items-center justify-center text-green-800 font-bold font-display flex-shrink-0 text-sm">04</div>
           <div>
             <h4 class="font-semibold text-stone-900">Deployment</h4>
             <p class="text-stone-500 text-sm mt-1 leading-relaxed">Shipping projects live using Netlify and GitHub with version control.</p>
           </div>
         </div>
       </div>
+
     </div>
   </section>
- 
-  <!-- SKILLS -->
-  <section id="skills" class="py-20 md:py-28 bg-[#faf7f2]">
-    <div class="max-w-6xl mx-auto px-6">
+
+  <!-- ═══ SKILLS ═══ -->
+  <section id="skills" class="py-20 sm:py-28 bg-[#faf7f2]">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
       <span class="accent-line"></span>
-      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 mb-3">Skills & Tools</h2>
-      <p class="text-stone-500 mb-12 max-w-lg">Technologies I've worked with and am continuously building expertise in.</p>
- 
-      <div class="grid md:grid-cols-2 gap-8 mb-12">
-        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+      <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold text-stone-900 mb-3">Skills &amp; Tools</h2>
+      <p class="text-stone-500 mb-10 sm:mb-14 max-w-lg text-sm sm:text-base">
+        Technologies I've worked with and am continuously building expertise in.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 sm:gap-8 mb-10 sm:mb-12">
+
+        <!-- Frontend -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
           <div class="flex items-center gap-2 mb-7">
             <span class="w-2.5 h-2.5 rounded-full bg-green-600 inline-block"></span>
             <h3 class="font-display font-bold text-lg text-stone-900">Frontend</h3>
           </div>
           <div class="space-y-5">
             <div>
-              <div class="flex justify-between text-sm mb-2"><span class="font-medium text-stone-700">HTML & CSS</span><span class="text-stone-400">85%</span></div>
-              <div class="h-2 bg-stone-100 rounded-full"><div class="bar-fill bg-green-600" style="width:85%"></div></div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="font-medium text-stone-700">HTML &amp; CSS</span>
+                <span class="text-stone-400">85%</span>
+              </div>
+              <div class="h-2 bg-stone-100 rounded-full">
+                <div class="bar-fill bg-green-600" style="width:85%"></div>
+              </div>
             </div>
             <div>
-              <div class="flex justify-between text-sm mb-2"><span class="font-medium text-stone-700">Tailwind CSS</span><span class="text-stone-400">80%</span></div>
-              <div class="h-2 bg-stone-100 rounded-full"><div class="bar-fill bg-green-600" style="width:80%"></div></div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="font-medium text-stone-700">Tailwind CSS</span>
+                <span class="text-stone-400">80%</span>
+              </div>
+              <div class="h-2 bg-stone-100 rounded-full">
+                <div class="bar-fill bg-green-600" style="width:80%"></div>
+              </div>
             </div>
             <div>
-              <div class="flex justify-between text-sm mb-2"><span class="font-medium text-stone-700">JavaScript</span><span class="text-stone-400">55%</span></div>
-              <div class="h-2 bg-stone-100 rounded-full"><div class="bar-fill bg-green-500" style="width:55%"></div></div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="font-medium text-stone-700">JavaScript</span>
+                <span class="text-stone-400">15%</span>
+              </div>
+              <div class="h-2 bg-stone-100 rounded-full">
+                <div class="bar-fill bg-green-500" style="width:55%"></div>
+              </div>
             </div>
           </div>
         </div>
- 
-        <div class="bg-white rounded-2xl p-6 md:p-8 shadow-sm">
+
+        <!-- Backend & Tools -->
+        <div class="bg-white rounded-2xl p-6 sm:p-8 shadow-sm">
           <div class="flex items-center gap-2 mb-7">
             <span class="w-2.5 h-2.5 rounded-full bg-stone-800 inline-block"></span>
-            <h3 class="font-display font-bold text-lg text-stone-900">Tools</h3>
+            <h3 class="font-display font-bold text-lg text-stone-900">Backend &amp; Tools</h3>
           </div>
           <div class="space-y-5">
             <div>
-              <div class="flex justify-between text-sm mb-2"><span class="font-medium text-stone-700">Git & GitHub</span><span class="text-stone-400">65%</span></div>
-              <div class="h-2 bg-stone-100 rounded-full"><div class="bar-fill bg-stone-700" style="width:65%"></div></div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="font-medium text-stone-700">Git &amp; GitHub</span>
+                <span class="text-stone-400">65%</span>
+              </div>
+              <div class="h-2 bg-stone-100 rounded-full">
+                <div class="bar-fill bg-stone-700" style="width:65%"></div>
+              </div>
             </div>
             <div>
-              <div class="flex justify-between text-sm mb-2"><span class="font-medium text-stone-700">VS Code</span><span class="text-stone-400">90%</span></div>
-              <div class="h-2 bg-stone-100 rounded-full"><div class="bar-fill bg-stone-800" style="width:90%"></div></div>
-            </div>
-            <div>
-              <div class="flex justify-between text-sm mb-2"><span class="font-medium text-stone-700">Netlify</span><span class="text-stone-400">70%</span></div>
-              <div class="h-2 bg-stone-100 rounded-full"><div class="bar-fill bg-stone-600" style="width:70%"></div></div>
+              <div class="flex justify-between text-sm mb-2">
+                <span class="font-medium text-stone-700">VS Code</span>
+                <span class="text-stone-400">90%</span>
+              </div>
+              <div class="h-2 bg-stone-100 rounded-full">
+                <div class="bar-fill bg-stone-800" style="width:90%"></div>
+              </div>
             </div>
           </div>
         </div>
+
       </div>
- 
-      <div class="flex flex-wrap gap-3">
-        <span class="px-4 py-2 bg-white border border-stone-200 rounded-full text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">HTML5</span>
-        <span class="px-4 py-2 bg-white border border-stone-200 rounded-full text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">CSS3</span>
-        <span class="px-4 py-2 bg-white border border-stone-200 rounded-full text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">Tailwind CSS</span>
-        <span class="px-4 py-2 bg-white border border-stone-200 rounded-full text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">JavaScript</span>
-        <span class="px-4 py-2 bg-white border border-stone-200 rounded-full text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">Git & GitHub</span>
-        <span class="px-4 py-2 bg-white border border-stone-200 rounded-full text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">Netlify</span>
-        <span class="px-4 py-2 bg-white border border-stone-200 rounded-full text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">VS Code</span>
+
+      <!-- Tech pills -->
+      <div class="flex flex-wrap gap-2 sm:gap-3">
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">HTML5</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">CSS3</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">Tailwind CSS</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">JavaScript</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">Node.js</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">Express.js</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">MongoDB</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">React Native</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">Git &amp; GitHub</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">Netlify</span>
+        <span class="px-3 sm:px-4 py-1.5 sm:py-2 bg-white border border-stone-200 rounded-full text-xs sm:text-sm font-medium text-stone-700 hover:border-green-600 hover:text-green-700 transition-colors cursor-default">VS Code</span>
       </div>
     </div>
   </section>
- 
-  <!-- CONTACT -->
-  <section id="contact" class="py-20 md:py-28 bg-stone-900 text-white">
-    <div class="max-w-6xl mx-auto px-6">
-      <div class="grid md:grid-cols-2 gap-12 md:gap-16 items-start">
+
+  <!-- ═══ CONTACT ═══ -->
+  <section id="contact" class="py-20 sm:py-28 bg-stone-900 text-white">
+    <div class="max-w-6xl mx-auto px-4 sm:px-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 md:gap-16 items-start">
+
+        <!-- Left: copy -->
         <div>
           <span class="block w-14 h-1 bg-green-500 mb-6 rounded-full"></span>
           <h2 class="font-display text-3xl sm:text-4xl md:text-5xl font-bold mb-6 leading-tight">
-            Let's Work<br><span class="text-green-400">Together.</span>
+            Let's Work<br/><span class="text-green-400">Together.</span>
           </h2>
-          <p class="text-stone-400 leading-relaxed mb-10 max-w-md">
+          <p class="text-stone-400 leading-relaxed mb-8 sm:mb-10 max-w-md text-sm sm:text-base">
             I'm open to freelance projects, internships, and junior developer roles.
             If you have something in mind, reach out — I reply fast.
           </p>
+
           <div class="space-y-5">
             <div class="flex items-center gap-4">
-              <div class="w-11 h-11 bg-stone-800 rounded-xl flex items-center justify-center text-green-400 text-lg flex-shrink-0">✉</div>
+              <div class="w-11 h-11 bg-stone-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+                </svg>
+              </div>
               <div>
                 <p class="text-stone-500 text-xs uppercase tracking-widest mb-0.5">Email</p>
-                <a href="mailto:gabrieladebayo10@gmail.com" class="text-white font-medium text-sm hover:text-green-400 transition-colors break-all">gabrieladebayo10@gmail.com</a>
+                <a href="mailto:gabrieladebayo10@gmail.com"
+                   class="text-white font-medium hover:text-green-400 transition-colors text-sm sm:text-base break-all sm:break-normal">
+                  gabrieladebayo10@gmail.com
+                </a>
               </div>
             </div>
             <div class="flex items-center gap-4">
-              <div class="w-11 h-11 bg-stone-800 rounded-xl flex items-center justify-center text-green-400 text-lg flex-shrink-0">📍</div>
+              <div class="w-11 h-11 bg-stone-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-green-400" fill="currentColor" viewBox="0 0 24 24">
+                  <path d="M12 0C5.37 0 0 5.37 0 12c0 5.3 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0 1 12 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.573C20.565 21.795 24 17.295 24 12c0-6.63-5.37-12-12-12z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-stone-500 text-xs uppercase tracking-widest mb-0.5">GitHub</p>
+                <a href="https://github.com/Top-G-script" target="_blank"
+                   class="text-white font-medium hover:text-green-400 transition-colors text-sm sm:text-base">
+                  github.com/Top-G-script
+                </a>
+              </div>
+            </div>
+            <div class="flex items-center gap-4">
+              <div class="w-11 h-11 bg-stone-800 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-green-400" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </div>
               <div>
                 <p class="text-stone-500 text-xs uppercase tracking-widest mb-0.5">Location</p>
-                <p class="text-white font-medium text-sm">Lagos, Nigeria</p>
+                <p class="text-white font-medium text-sm sm:text-base">Lagos, Nigeria 🇳🇬</p>
               </div>
             </div>
           </div>
-          <div class="flex flex-wrap gap-3 mt-10">
-            <a href="https://github.com/Top-G-script" target="_blank" class="bg-stone-800 hover:bg-green-800 transition-colors text-white text-sm font-medium px-5 py-2.5 rounded-full">GitHub</a>
-            <a href="#" class="bg-stone-800 hover:bg-green-800 transition-colors text-white text-sm font-medium px-5 py-2.5 rounded-full">LinkedIn</a>
-            <a href="#" class="bg-stone-800 hover:bg-green-800 transition-colors text-white text-sm font-medium px-5 py-2.5 rounded-full">Twitter</a>
-          </div>
         </div>
- 
-        <!-- Form -->
-        <div class="bg-stone-800 rounded-2xl p-6 md:p-8 mt-8 md:mt-0">
-          <h3 class="font-display font-bold text-xl mb-7">Send a Message</h3>
-          <div class="space-y-5">
+
+        <!-- Right: form -->
+        <div class="bg-stone-800 rounded-2xl p-6 sm:p-8">
+          <h3 class="font-display font-bold text-xl text-white mb-6">Send a Message</h3>
+          <form action="mailto:gabrieladebayo10@gmail.com" method="GET" class="space-y-5">
             <div>
-              <label class="text-stone-400 text-xs uppercase tracking-widest block mb-2">Your Name</label>
-              <input type="text" placeholder="John Doe" class="w-full bg-stone-700 border border-stone-600 rounded-xl px-4 py-3.5 text-white placeholder-stone-500 focus:outline-none focus:border-green-500 transition-colors text-sm">
+              <label class="block text-stone-400 text-xs uppercase tracking-widest mb-2">Your Name</label>
+              <input type="text" name="name" placeholder="Gabriel"
+                     class="w-full bg-stone-700 border border-stone-600 text-white placeholder-stone-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-green-500 transition-colors" />
             </div>
             <div>
-              <label class="text-stone-400 text-xs uppercase tracking-widest block mb-2">Email Address</label>
-              <input type="email" placeholder="john@example.com" class="w-full bg-stone-700 border border-stone-600 rounded-xl px-4 py-3.5 text-white placeholder-stone-500 focus:outline-none focus:border-green-500 transition-colors text-sm">
+              <label class="block text-stone-400 text-xs uppercase tracking-widest mb-2">Email Address</label>
+              <input type="email" name="email" placeholder="@email.com"
+                     class="w-full bg-stone-700 border border-stone-600 text-white placeholder-stone-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-green-500 transition-colors" />
             </div>
             <div>
-              <label class="text-stone-400 text-xs uppercase tracking-widest block mb-2">Message</label>
-              <textarea rows="4" placeholder="Tell me about your project..." class="w-full bg-stone-700 border border-stone-600 rounded-xl px-4 py-3.5 text-white placeholder-stone-500 focus:outline-none focus:border-green-500 transition-colors text-sm resize-none"></textarea>
+              <label class="block text-stone-400 text-xs uppercase tracking-widest mb-2">Message</label>
+              <textarea name="body" rows="4" placeholder="Tell me about your project..."
+                        class="w-full bg-stone-700 border border-stone-600 text-white placeholder-stone-500 rounded-xl px-4 py-3 text-sm focus:outline-none focus:border-green-500 transition-colors resize-none"></textarea>
             </div>
-            <a href="mailto:gabrieladebayo10@gmail.com" class="block w-full bg-green-700 hover:bg-green-600 transition-colors text-white font-semibold py-3.5 rounded-xl text-sm text-center">Send Message ✉</a>
-          </div>
-          <p class="text-stone-500 text-xs mt-4 text-center">I typically respond within 24 hours</p>
+            <button type="submit"
+                    class="w-full bg-green-700 hover:bg-green-600 text-white font-semibold py-3 rounded-xl transition-colors text-sm">
+              Send Message →
+            </button>
+          </form>
         </div>
+
       </div>
     </div>
-  </section>, initial-scale=1.0">
-  <title>Document</title>
-</head>
-<body>
-  
+  </section>
+
+  <!-- ═══ FOOTER ═══ -->
+  <footer class="bg-stone-950 py-6 sm:py-8 text-center text-stone-600 text-xs sm:text-sm px-4">
+    <p>© 2026 <span class="text-stone-400 font-semibold">Adebayo Gabriel</span> — Built with Tailwind CSS</p>
+  </footer>
+
 </body>
 </html>
